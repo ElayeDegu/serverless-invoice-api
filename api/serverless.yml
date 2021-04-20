@@ -22,6 +22,8 @@ plugins:
   - serverless-offline
 
 custom:
+  serverless-offline:
+    noPrependStageInUrl: true
   stage: ${opt:stage, self:provider.stage}
   DB_PREFIX: ${file(./config.yml):${self:custom.stage}.DB_PREFIX}
   dynamodb:
