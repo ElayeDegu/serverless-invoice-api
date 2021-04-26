@@ -2,6 +2,7 @@
 
 var helper = require('./helper'),
   response = require('./response');
+var authHandler = require('./authHandler');
 
 module.exports.getAllInvoices = (event, cb) => {
   helper
@@ -41,7 +42,7 @@ module.exports.createInvoice = (event, cb) => {
 };
 
 module.exports.updateInvoice = (event, cb) => {
-  helper
+  authHandler
     .updateInvoice(JSON.parse(event.body))
     .then(result => {
       cb(null, response.create(200, {}));
@@ -57,7 +58,7 @@ module.exports.updateInvoice = (event, cb) => {
 };
 
 module.exports.updateInvoiceStatus = (event, cb) => {
-  helper
+  authHandler
     .updateInvoiceStatus(JSON.parse(event.body))
     .then(result => {
       cb(null, response.create(200, {}));
@@ -73,7 +74,7 @@ module.exports.updateInvoiceStatus = (event, cb) => {
 };
 
 module.exports.deleteInvoice = (event, cb) => {
-  helper
+  authHandler
     .deleteInvoice(event.pathParameters)
     .then(result => {
       cb(null, response.create(200, {}));

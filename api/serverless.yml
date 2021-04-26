@@ -39,45 +39,31 @@ custom:
             sources: [./offline/migrations/invoice-seed.json]
 
 functions:
+  app:
+       handler: api/httpHandler.handler
+       events:
+          - http: ANY /
+          - http: 'ANY {proxy+}'
   getAllInvoices:
-    handler: handler.getAllInvoices
-    events:
-      - http:
-          method: GET
-          path: invoices/getAll
-          cors: true
-
+        handler: api/httpHandler.handler
+        events:
+          - http: 'GET /getAllInvoices'
   createInvoice:
-    handler: handler.createInvoice
-    events:
-      - http:
-          method: POST
-          path: invoices
-          cors: true
-
+        handler: api/httpHandler.handler
+        events:
+          - http: 'POST /createInvoice'
   updateInvoice:
-    handler: handler.updateInvoice
-    events:
-      - http:
-          method: PUT
-          path: invoices/update
-          cors: true
-
+        handler: api/httpHandler.handler
+        events:
+          - http: 'PUT /updateInvoice'
   updateInvoiceStatus:
-    handler: handler.updateInvoiceStatus
-    events:
-      - http:
-          method: PUT
-          path: invoices/status
-          cors: true
-
+        handler: api/httpHandler.handler
+        events:
+          - http: 'PUT /updateInvoiceStatus'
   deleteInvoice:
-    handler: handler.deleteInvoice
-    events:
-      - http:
-          method: DELETE
-          path: invoices/delete/{id}
-          cors: true
+        handler: api/httpHandler.handler
+        events:
+          - http: 'DELETE /deleteInvoice'
 
 resources:
   Resources: ${file(offline/migrations/invoice.yml)}
